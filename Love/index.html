@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Ritika ✨</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Sections */
+section {
+    min-height: 100vh;
+    padding: 70px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Royal glowing text */
+.royal {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4em;
+    color: gold;
+    text-shadow:
+        0 0 10px rgba(255,215,0,0.8),
+        0 0 25px rgba(255,215,0,0.6);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px gold; }
+    to { text-shadow: 0 0 30px gold; }
+}
+
+p {
+    font-size: 1.15em;
+    max-width: 650px;
+    line-height: 1.7;
+}
+
+.swipe {
+    margin-top: 30px;
+    font-size: 0.9em;
+    opacity: 0.8;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+
+/* Gallery */
+.gallery {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+.gallery img {
+    width: 75%;
+    max-width: 260px;
+    border-radius: 20px;
+    scroll-snap-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+
+/* Buttons */
+button {
+    margin-top: 25px;
+    padding: 14px 38px;
+    font-size: 1.1em;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, gold, #ffdd88);
+    color: #3b2f00;
+    font-weight: bold;
+}
+
+#yesScreen {
+    display: none;
+}
+
+/* Hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* Sparkles */
+.star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.8;
+    animation: twinkle 4s infinite;
+}
+
+@keyframes twinkle {
+    0%,100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 Background Music -->
+<audio id="music" preload="auto" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🌟 Page 1 -->
+<section>
+    <h1 class="royal">Ritika ✨</h1>
+    <p>
+        Once upon a time…<br>
+        a girl walked into my life<br>
+        and turned ordinary moments into magic.
+    </p>
+    <p class="swipe">Scroll & Feel ⬇️</p>
+</section>
+
+<!-- 🌙 Page 2 -->
+<section>
+    <h1 class="royal">Our Little Fairytale 📸</h1>
+    <p>
+        Proof that happiness looks best<br>
+        when you’re smiling next to me 😄
+    </p>
+
+    <div class="gallery">
+        <img src="img1.jpg">
+        <img src="img2.jpg">
+        <img src="img3.jpg">
+    </div>
+
+    <p class="swipe">Keep going →</p>
+</section>
+
+<!-- 💖 Page 3 -->
+<section>
+    <h1 class="royal">From My Heart 💖</h1>
+    <p>
+        If the world was ending,<br>
+        I wouldn’t look for safety…<br>
+        I’d look for <strong>you</strong>.<br><br>
+
+        Because you’re my calm,<br>
+        my laughter,<br>
+        and my favorite place to belong.
+    </p>
+
+    <!-- ✅ ONLY USER GESTURE -->
+    <button onclick="tapForMagic()">Tap for magic ✨</button>
+</section>
+
+<!-- 👑 Final Question -->
+<section id="final">
+    <h1 class="royal">Will you be mine forever? 💍</h1>
+    <button onclick="yes()">YES 💖</button>
+</section>
+
+<!-- 🎁 SECRET YES SCREEN -->
+<section id="yesScreen">
+    <h1 class="royal">She Said YES 😍✨</h1>
+    <p>
+        Ritika,<br><br>
+        My forever starts right here… with you ❤️
+    </p>
+</section>
+
+<script>
+function tapForMagic() {
+    const music = document.getElementById("music");
+
+    // 🔊 Start music ONLY on this button click
+    if (music.paused) {
+        music.volume = 0.5;
+        music.play().catch(()=>{});
+    }
+
+    // Scroll to final question
+    document.getElementById("final")
+        .scrollIntoView({ behavior: "smooth" });
+}
+
+function yes() {
+    document.getElementById("final").style.display = "none";
+    document.getElementById("yesScreen").style.display = "flex";
+    confetti();
+}
+
+/* Hearts */
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+}, 400);
+
+/* Sparkles */
+for(let i=0;i<60;i++){
+    const s = document.createElement("div");
+    s.className = "star";
+    s.style.left = Math.random()*100+"vw";
+    s.style.top = Math.random()*100+"vh";
+    s.style.animationDelay = Math.random()*4+"s";
+    document.body.appendChild(s);
+}
+
+/* Confetti */
+function confetti(){
+    for(let i=0;i<80;i++){
+        const c = document.createElement("div");
+        c.className="heart";
+        c.innerHTML="✨";
+        c.style.left=Math.random()*100+"vw";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    }
+}
+</script>
+
+</body>
+</html>
